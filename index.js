@@ -27,6 +27,30 @@ function dateTime(timestamp) {
   return formattedDate;
 }
 
+function displayForecast {
+    let forecastElement = document.querySelector("#forecast");
+    let forecastHTML = `<div class="row"`;
+    let days = ["Thurs", "Fri", "Sat"];
+    days.forEach(function (day)) {
+        forecastHTML =  
+        forecastHTML + `
+    <div class="row">
+            <div class="col-2">
+                <div class="weather-forecast-date">
+                    Thurs
+                </div>
+                <div id="icon"></div>
+                <div class="wearther-forecast-temp">
+                    <span class="wearther-forecast-temp-max">18</span>
+                    <span class="wearther-forecast-temp-min">12</span>
+                </div>
+            </div>
+        </div>
+    `;
+    }
+    
+}
+
 function showWeatherTemp(response) {
   let temperatureElement = document.querySelector("#temperature");
   let celciusTemperature = response.data.temperature.current;
@@ -60,6 +84,9 @@ function searchCity(city) {
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}`;
   axios.get(apiUrl).then(showWeatherTemp);
 }
+
+displayForecast();
+
 function submit(event) {
   event.preventDefault();
   let city = document.querySelector("#city-input").value;
