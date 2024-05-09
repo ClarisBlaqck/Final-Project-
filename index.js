@@ -85,7 +85,6 @@ function searchCity(city) {
   axios.get(apiUrl).then(showWeatherTemp);
 }
 
-displayForecast();
 
 function submit(event) {
   event.preventDefault();
@@ -122,3 +121,5 @@ currentButton.addEventListener(`click`, getCurrentLocation);
 let changeTemperature = document.querySelector("#fahrenheit-link");
 changeTemperature.addEventListener(`click`, showConversion);
 let temperature = document.querySelector(`#temperature`);
+let displayForecast = document.querySelector(#forecast);
+displayForecast()
