@@ -31,30 +31,15 @@ function dateTime(timestamp) {
 function displayForecast() {
     let forecastElement = document.querySelector("#forecast");
 
-forecastElement.innerHTML=  `
-<div class="row">
-        <div class="col-2">
-            <div class="weather-forecast-date">
-                Thurs
-            </div>
-            <div id="icon"></div>
-            <div class="wearther-forecast-temp">
-                <span class="wearther-forecast-temp-max">18</span>
-                <span class="wearther-forecast-temp-min">12</span>
-            </div>
-        </div>
-    </div>
-`;
-
-    let forecastHTML = `<div class="row"`;
-    let days = ["Thurs", "Fri", "Sat"];
-    days.forEach(function (day)) {
+    let forecastHTML = `<div class="row">`;
+    let days = ["Thurs", "Fri", "Sat", "Sun"];
+    days.forEach(function (day) {
         forecastHTML =  
-        forecastHTML + `
-    <div class="row">
-            <div class="col-2">
+        forecastHTML + 
+        `
+        <div class="col-2">
                 <div class="weather-forecast-date">
-                    Thurs
+                    ${day}
                 </div>
                 <div id="icon"></div>
                 <div class="wearther-forecast-temp">
@@ -62,10 +47,10 @@ forecastElement.innerHTML=  `
                     <span class="wearther-forecast-temp-min">12</span>
                 </div>
             </div>
-        </div>
-    `;
-    }
-    
+      `;
+    });
+    forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML = forecastHTML;
 }
 
 function showWeatherTemp(response) {
