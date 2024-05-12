@@ -105,6 +105,13 @@ function submit(event) {
   let city = document.querySelector("#city-input").value;
   searchCity(city);
 }
+
+function formatDay(timestamp){
+let date = new Date(timestamp * 1000);
+let days =  ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+return days[date.getDay()];
+}
+
 function showConversion(event) {
   event.preventDefault();
   let farenheitTemperature = (14 * 9) / 5 + 32;
