@@ -46,3 +46,14 @@ text-align: center;
 .wearther-forecast-temp-min{
     opacity: 0.5;
 }
+
+.btn{
+    background-color: #c82fc8;
+}
+
+.weather-forecast-icon{
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin: 0 auto;
+}
