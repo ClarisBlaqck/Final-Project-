@@ -1,6 +1,3 @@
-alert("Hello");
-alert("welcome");
-
 function dateTime(timestamp) {
   let now = new Date(timestamp);
   let date = now.getDate();
@@ -29,43 +26,46 @@ function dateTime(timestamp) {
 }
 
 function displayForecast(response) {
-    let forecastElement = document.querySelector("#forecast");
+  let forecastElement = document.querySelector("#forecast");
 
-    let forecastHTML = `<div class="row">`;
-    let days = ["Weds", "Thurs", "Fri", "Sat", "Sun"];
-    response.data.daily.forEach(function (day, index) {
-      if (index < 5) {
-        forecastHTML =  
-        forecastHTML + 
+  let forecastHTML = `<div class="row">`;
+  response.data.daily.forEach(function (day, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
         `
         <div class="col-2">
                 <div class="weather-forecast-date">
                     ${formatDay(day.time)}
                 </div>
-                <div id="weather-forecast-icon"><img src="${day.condition.icon_url}" /></div>
+                <div id="weather-forecast-icon"><img src="${
+                  day.condition.icon_url
+                }" /></div>
                 <div class="wearther-forecast-temp">
-                    <span class="wearther-forecast-temp-max">${Math.round(day.temperature.maximum)}</span>
-                    <span class="wearther-forecast-temp-min">${Math.round(day.temperature.minimum)}</span>
+                    <span class="wearther-forecast-temp-max">${Math.round(
+                      day.temperature.maximum
+                    )}</span>
+                    <span class="wearther-forecast-temp-min">${Math.round(
+                      day.temperature.minimum
+                    )}</span>
                 </div>
             </div>
-      `;}
-    });
-    forecastHTML = forecastHTML + `</div>`;
-    forecastElement.innerHTML = forecastHTML;
+      `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
 }
 
-function getForecast(coordinates) {
-  console.log(coordinates);
+function getForecast(city) {
   let apiKey = "1a747f2d7ac32a100bt13fab8776o6ca";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?
-  lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&
-  units=metric`
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 
 function showWeatherTemp(response) {
   let temperatureElement = document.querySelector("#temperature");
-  let celciusTemperature = response.data.temperature.current;
+  celciusTemperature = response.data.temperature.current;
   let cityElement = document.querySelector("#city");
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#windspeed");
@@ -81,16 +81,7 @@ function showWeatherTemp(response) {
   dateElement.innerHTML = dateTime(response.data.time * 1000);
   icon.innerHTML = `<img src="${response.data.condition.icon_url}" />`;
 
-  getForecast(response.data.coord);
-}
-
-function iconDisplay() {
-  let iconElement = document.querySelector("#icon");
-  iconElement.setAttribute(
-    "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-  iconElement.innerHTML = "#icon";
+  getForecast(response.data.coordinates);
 }
 
 function searchCity(city) {
@@ -99,17 +90,16 @@ function searchCity(city) {
   axios.get(apiUrl).then(showWeatherTemp);
 }
 
-
 function submit(event) {
   event.preventDefault();
   let city = document.querySelector("#city-input").value;
   searchCity(city);
 }
 
-function formatDay(timestamp){
-let date = new Date(timestamp * 1000);
-let days =  ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
-return days[date.getDay()];
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thurs", "Fri", "Sat"];
+  return days[date.getDay()];
 }
 
 function showConversion(event) {
@@ -120,7 +110,7 @@ function showConversion(event) {
 }
 
 function searchLocation(position) {
-  let apiKey = "1a747f2d7ac32a100bt13fab8776o6ca";
+  let apiKey = "f3009e4852fa0a079dab291dabf020c4";
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
   let units = "metric";
@@ -141,4 +131,6 @@ let currentButton = document.querySelector("#current-location-button");
 currentButton.addEventListener(`click`, getCurrentLocation);
 let changeTemperature = document.querySelector("#fahrenheit-link");
 changeTemperature.addEventListener(`click`, showConversion);
-let temperature = document.querySelector(`#temperature`);
+
+let celciusTemperature = null;
+searchCity("Yaounde");
