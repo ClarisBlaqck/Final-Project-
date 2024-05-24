@@ -142,4 +142,3 @@ currentButton.addEventListener(`click`, getCurrentLocation);
 let changeTemperature = document.querySelector("#fahrenheit-link");
 changeTemperature.addEventListener(`click`, showConversion);
 let temperature = document.querySelector(`#temperature`);
-displayForecast()
